@@ -26,8 +26,7 @@ class Movie{
 
   required this.genre,
 
-  required this. genre,
-
+ 
   required this.language,
   required this.plot,
   required this.poster,
@@ -60,22 +59,7 @@ class Movie{
        imdbRating: json["imdbRating"].toString(),
        imdbVotes: json["imdbVotes"]?.toString()??'',
 
-      title: json['title']??'', 
-      awards: json['awards']??'',
-       country: json['country']??'',
-       director: json['director']??'',
-       genre: json['genre']??'',
-       language: json['lang']??'',
-       plot: json['plot']??'',
-       poster: json['poster']??'',
-       rated: json['rated']??'',
-       released: json['released']??'',
-       runtime: json['time']??'',
-       writer: json['writer']??'',
-       year: json['year']??'',
-       imdbRating: json['imdbrating'].toString(),
-       imdbVotes: json['imdbvotes']??'',
-
+      
 
       
       
