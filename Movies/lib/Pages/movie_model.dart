@@ -23,7 +23,11 @@ class Movie{
   required this.awards,
   required this.country,
   required this.director,
+
   required this.genre,
+
+  required this. genre,
+
   required this.language,
   required this.plot,
   required this.poster,
@@ -39,6 +43,7 @@ class Movie{
 
   factory Movie.fromJson(Map<String,dynamic>json){
     return Movie(
+
       title: json["Title"]?.toString()??'', 
       awards: json["Awards"]?.toString()??'',
        country: json["Country"]?.toString()??'',
@@ -55,13 +60,32 @@ class Movie{
        imdbRating: json["imdbRating"].toString(),
        imdbVotes: json["imdbVotes"]?.toString()??'',
 
+      title: json['title']??'', 
+      awards: json['awards']??'',
+       country: json['country']??'',
+       director: json['director']??'',
+       genre: json['genre']??'',
+       language: json['lang']??'',
+       plot: json['plot']??'',
+       poster: json['poster']??'',
+       rated: json['rated']??'',
+       released: json['released']??'',
+       runtime: json['time']??'',
+       writer: json['writer']??'',
+       year: json['year']??'',
+       imdbRating: json['imdbrating'].toString(),
+       imdbVotes: json['imdbvotes']??'',
+
+
       
       
     );
   }
+
    List<String> get genreList {
     return genre.split(',').map((word) => word.trim()).toList();
   }
+
   
 }
 

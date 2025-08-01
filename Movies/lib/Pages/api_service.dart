@@ -8,7 +8,8 @@ Future<Movie> fetchMovie() async{
 
   if(response.statusCode==200){
     final data = jsonDecode(response.body);
-    
+
+
     return Movie.fromJson(data);
   } else {
     throw Exception('Failed to load movie');
