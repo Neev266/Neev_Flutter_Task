@@ -19,7 +19,7 @@ class _MoviesState extends State<Movies> {
     _movie = fetchMovie();
   }
 
-  void _shuffleMovie() {
+  void _shuffleMovie() async {
     setState(() {
       _movie = fetchMovie();
     });
@@ -32,6 +32,7 @@ class _MoviesState extends State<Movies> {
       body: SafeArea(
         child: FutureBuilder(
           future: _movie,
+          
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator(color: Colors.green));
@@ -40,10 +41,10 @@ class _MoviesState extends State<Movies> {
           } else if (!snapshot.hasData) {
             return const Center(child: Text('No movie found', style: TextStyle(color: Colors.white)));
           }
-
+        
          final movie = snapshot.data!;
          final List<String> wordList = movie.genre.split(',').map((w) => w.trim()).toList();
-
+        
          return SingleChildScrollView(
            child: Padding(
             padding: const EdgeInsets.all(10.0),
@@ -65,14 +66,16 @@ class _MoviesState extends State<Movies> {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 15),
-                      child: Text(
-                        movie.title,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 25,
-                          fontWeight: FontWeight.bold,
-                          
+                      child: Center(
+                        child: Text(
+                          movie.title,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                            
+                          ),
                         ),
                       ),
                     ),
@@ -82,9 +85,7 @@ class _MoviesState extends State<Movies> {
                         child: Image.network(
                           movie.poster,
                           width: MediaQuery.of(context).size.width * 0.9,
-                          
                           fit: BoxFit.cover,
-                          
                           ),
                           
                       ),
@@ -114,7 +115,7 @@ class _MoviesState extends State<Movies> {
                             }).toList(),
                           ),
                         ),
-
+        
                     SizedBox(
                       height: 5,
                     ),
@@ -328,33 +329,40 @@ class _MoviesState extends State<Movies> {
                   ),
                 ),
                 SizedBox(height: 5,),
-                SizedBox(
-                  width:900,
-                  height: 35,
-                  child: ElevatedButton(
-                   onPressed: () {
-                    _shuffleMovie();
-                   },
-                  style: ButtonStyle(
-                    backgroundColor: WidgetStateProperty.all<Color>(Colors.green),
-                    
-                  ), 
-                  child: Text(
-                    'Shuffle',
-                    style: TextStyle(
-                      color: Colors.black,
-                    ),
-                  ),
-                  ),
-                )
+                
               ],
             ),
+            
             
           ),
          );
         }
         ),
+        
       ),
+      // bottomNavigationBar is not a widget and cant be used inside a column it can be only used in scaffold directly
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.fromLTRB(5,0,5,20),
+        child: SizedBox(
+                    width:MediaQuery.of(context).size.width * 0.8,
+                    height: 40,
+                    child: ElevatedButton(
+                     onPressed: () {
+                      _shuffleMovie();
+                     },
+                    style: ButtonStyle(
+                      backgroundColor: WidgetStateProperty.all<Color>(Colors.green),
+                      
+                    ), 
+                    child: Text(
+                      'Shuffle',
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
+                    ),
+                    ),
+                  ),
+      )
     );
   }
 }
